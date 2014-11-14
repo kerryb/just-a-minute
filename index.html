@@ -1,11 +1,25 @@
 <!doctype html>
-<html ng-app>
+<html ng-app="justAMinute">
   <head>
     <title>Just a Minute</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/app.css">
     <script src="bower_components/angular/angular.js"></script>
+    <script src="js/app.js"></script>
   </head>
   <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="timer" ng-controller="timerController">
+          <div class="col-md-2 col-md-offset-4">
+            <span class="remaining">{{ timer.remaining | number:1 }}</span>
+          </div>
+          <div class="col-md-4 buttons">
+            <button class="btn btn-success" ng-click="start()">Start</button>
+            <button class="btn btn-danger" ng-click="stop()">Stop</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
