@@ -2,7 +2,10 @@ var app = angular.module("justAMinute", []);
 
 app.controller("timerController", ["$scope", "$interval", function($scope, $interval) {
   $scope.timer = {
-    remaining: 60
+    remaining: 60,
+    progressStyle: function() {
+      return { width: this.remaining / 0.6 + "%" };
+    }
   };
 
   $scope.tick = function() {
