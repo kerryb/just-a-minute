@@ -10,6 +10,9 @@ app.controller("timerController", ["$scope", "$interval", function($scope, $inte
 
   $scope.tick = function() {
     $scope.timer.remaining -= 0.1;
+    if ($scope.timer.remaining <= 0) {
+      $scope.stop();
+    }
   };
 
   $scope.start = function() {
