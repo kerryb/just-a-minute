@@ -1,4 +1,8 @@
-var app = angular.module("justAMinute", []);
+var app = angular.module("justAMinute", ["xeditable"]);
+
+app.run(function(editableOptions) {
+  editableOptions.theme = 'bs3';
+});
 
 app.controller("timerController", ["$scope", "$interval", function($scope, $interval) {
   $scope.timer = {
@@ -23,3 +27,12 @@ app.controller("timerController", ["$scope", "$interval", function($scope, $inte
     $interval.cancel($scope.timer.ticker);
   };
 }]);
+
+app.directive("player",function() {
+  return {
+    scope: {
+      name: "@"
+    },
+    templateUrl: "player.html"
+  };
+});

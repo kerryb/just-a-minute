@@ -4,7 +4,9 @@
     <title>Just a Minute</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css">
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
     <script src="js/app.js"></script>
   </head>
   <body>
@@ -27,6 +29,18 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <player name="Player 1"></player>
+        <player name="Player 2"></player>
+        <player name="Player 3"></player>
+        <player name="Player 4"></player>
+      </div>
     </div>
+
+    <script type="text/ng-template" id="player.html">
+      <div class="col-md-3">
+        <h2 editable-text="name">{{ name }}</h2>
+      </div>
+    </script>
   </body>
 </html>

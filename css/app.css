@@ -9,3 +9,11 @@ body {
 .timer .buttons {
   margin-top: 1.6em;
 }
+
+h2.editable-click { 
+  border-bottom: none;
+}
+
+h2.editable-click:hover { 
+  border-bottom: dotted 2px #428bca;
+}
