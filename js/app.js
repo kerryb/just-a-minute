@@ -4,9 +4,18 @@ app.run(function(editableOptions) {
   editableOptions.theme = 'bs3';
 });
 
-app.controller("timerController", ["$scope", "$interval", "ngAudio",
-  function($scope, $interval, ngAudio) {
-    $scope.whistle = ngAudio.load("media/whistle.wav");
+app.factory("sounds", ["ngAudio", function(ngAudio) {
+  var sounds = {
+    _whistle: ngAudio.load("media/whistle.wav"),
+    whistle: function() {
+      this._whistle.play();
+    }
+  };
+  return sounds;
+}]);
+
+app.controller("timerController", ["$scope", "$interval", "sounds",
+  function($scope, $interval, sounds) {
     $scope.timer = {
       remaining: 60,
       progressStyle: function() {
@@ -15,16 +24,17 @@ app.controller("timerController", ["$scope", "$interval", "ngAudio",
     };
 
     $scope.tick = function() {
-      if ($scope.timer.remaining > 0.1) {
+      if ($scope.timer.remaining >= 0.1) {
         $scope.timer.remaining -= 0.1;
       } else {
+        $scope.timer.remaining = 0;
         $scope.timeUp();
       }
     };
 
     $scope.timeUp = function() {
       $scope.stop();
-      $scope.whistle.play();
+      sounds.whistle();
     };
 
     $scope.start = function() {
