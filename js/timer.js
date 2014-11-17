@@ -37,8 +37,14 @@ app.service("timer", ["$interval", "sounds", function($interval, sounds) {
   }(this);
 }]);
 
-app.controller("timerController", ["$scope", "timer",
-  function($scope, timer) {
+app.controller("timerController", ["$scope", "$document", "timer",
+  function($scope, $document, timer) {
     $scope.timer = timer;
+
+    $document.bind("keypress", function(event) {
+      if(event.which === 32) {
+        timer.start();
+      }
+    });
   }
 ]);
