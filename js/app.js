@@ -6,25 +6,30 @@ app.run(function(editableOptions) {
 
 app.service("sounds", ["ngAudio", function(ngAudio) {
   this._whistle = ngAudio.load("media/whistle.wav");
+
   this.whistle = function() {
     this._whistle.play();
   };
 }]);
 
-app.controller("timerController", ["$scope", "$interval", "sounds",
-  function($scope, $interval, sounds) {
-    $scope.timer = {
-      remaining: 60,
-      progressStyle: function() {
-        return { width: this.remaining / 0.6 + "%" };
-      }
-    };
+app.service("timer", [function() {
+  this.remaining = 60;
+
+  this.progressStyle = function() {
+    return { width: this.remaining / 0.6 + "%" };
+  }
+}]);
+
+app.controller("timerController", ["$scope", "$interval", "timer", "sounds",
+  function($scope, $interval, timer, sounds) {
+
+    $scope.timer = timer;
 
     $scope.tick = function() {
-      if ($scope.timer.remaining >= 0.1) {
-        $scope.timer.remaining -= 0.1;
+      if (timer.remaining >= 0.1) {
+        timer.remaining -= 0.1;
       } else {
-        $scope.timer.remaining = 0;
+        timer.remaining = 0;
         $scope.timeUp();
       }
     };
@@ -35,11 +40,11 @@ app.controller("timerController", ["$scope", "$interval", "sounds",
     };
 
     $scope.start = function() {
-      $scope.timer.ticker = $interval(this.tick, 100);
+      timer.ticker = $interval(this.tick, 100);
     };
 
     $scope.stop = function() {
-      $interval.cancel($scope.timer.ticker);
+      $interval.cancel(timer.ticker);
     };
   }
 ]);
