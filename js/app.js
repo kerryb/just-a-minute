@@ -4,14 +4,11 @@ app.run(function(editableOptions) {
   editableOptions.theme = 'bs3';
 });
 
-app.factory("sounds", ["ngAudio", function(ngAudio) {
-  var sounds = {
-    _whistle: ngAudio.load("media/whistle.wav"),
-    whistle: function() {
-      this._whistle.play();
-    }
+app.service("sounds", ["ngAudio", function(ngAudio) {
+  this._whistle = ngAudio.load("media/whistle.wav");
+  this.whistle = function() {
+    this._whistle.play();
   };
-  return sounds;
 }]);
 
 app.controller("timerController", ["$scope", "$interval", "sounds",
