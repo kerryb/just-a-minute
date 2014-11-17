@@ -51,8 +51,8 @@ app.service("timer", ["$interval", "sounds", function($interval, sounds) {
   }(this);
 }]);
 
-app.controller("timerController", ["$scope", "$interval", "timer", "sounds",
-  function($scope, $interval, timer, sounds) {
+app.controller("timerController", ["$scope", "timer",
+  function($scope, timer) {
     $scope.timer = timer;
   }
 ]);
