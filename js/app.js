@@ -17,10 +17,9 @@ app.service("timer", ["$interval", "sounds", function($interval, sounds) {
 
   this.tick = function(_this) {
     return function() {
-      if (_this.remaining >= 0.1) {
+      if (_this.remaining > 0) {
         _this.remaining -= 0.1;
       } else {
-        _this.remaining = 0;
         _this.timeUp();
       }
     };
