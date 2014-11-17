@@ -17,3 +17,7 @@ h2.editable-click {
 h2.editable-click:hover { 
   border-bottom: dotted 2px #428bca;
 }
+
+.buzzed {
+  border: 2px solid red;
+}

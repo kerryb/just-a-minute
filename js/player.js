@@ -1,8 +1,22 @@
-app.directive("player",function() {
+app.directive("player", function() {
   return {
     scope: {
-      name: "@"
+      name: "@",
+      key: "@",
     },
-    templateUrl: "player.html"
+
+    templateUrl: "player.html",
+
+    controller: function($scope, $document) {
+      $scope.buzz = function() {
+        $scope.buzzed = true;
+      }
+
+      $document.bind("keypress", function(event) {
+        if (event.which == $scope.key) {
+          $scope.buzz();
+        }
+      });
+    }
   };
 });
