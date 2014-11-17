@@ -12,40 +12,49 @@ app.service("sounds", ["ngAudio", function(ngAudio) {
   };
 }]);
 
-app.service("timer", [function() {
+app.service("timer", ["$interval", "sounds", function($interval, sounds) {
   this.remaining = 60;
 
-  this.progressStyle = function() {
-    return { width: this.remaining / 0.6 + "%" };
-  }
+  this.tick = function(_this) {
+    return function() {
+      if (_this.remaining >= 0.1) {
+        _this.remaining -= 0.1;
+      } else {
+        _this.remaining = 0;
+        _this.timeUp();
+      }
+    };
+  }(this);
+
+  this.timeUp = function(_this) {
+    return function() {
+      _this.stop();
+      sounds.whistle();
+    };
+  }(this);
+
+  this.start = function(_this) {
+    return function() {
+      _this.ticker = $interval(_this.tick, 100);
+    };
+  }(this);
+
+  this.stop = function(_this) {
+    return function() {
+      $interval.cancel(_this.ticker);
+    };
+  }(this);
+
+  this.progressStyle = function(_this) {
+    return function() {
+      return { width: _this.remaining / 0.6 + "%" };
+    };
+  }(this);
 }]);
 
 app.controller("timerController", ["$scope", "$interval", "timer", "sounds",
   function($scope, $interval, timer, sounds) {
-
     $scope.timer = timer;
-
-    $scope.tick = function() {
-      if (timer.remaining >= 0.1) {
-        timer.remaining -= 0.1;
-      } else {
-        timer.remaining = 0;
-        $scope.timeUp();
-      }
-    };
-
-    $scope.timeUp = function() {
-      $scope.stop();
-      sounds.whistle();
-    };
-
-    $scope.start = function() {
-      timer.ticker = $interval(this.tick, 100);
-    };
-
-    $scope.stop = function() {
-      $interval.cancel(timer.ticker);
-    };
   }
 ]);
 
