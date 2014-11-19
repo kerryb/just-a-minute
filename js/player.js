@@ -1,11 +1,14 @@
-app.service("players", ["sounds", function(sounds) {
-  this.buzz = function(_this) {
-    return function(playerNumber) {
-      _this.buzzedPlayer = playerNumber;
-      sounds.buzz();
-    };
-  }(this);
-}]);
+app.service("players", ["sounds", "timer",
+  function(sounds, timer) {
+    this.buzz = function(_this) {
+      return function(playerNumber) {
+        _this.buzzedPlayer = playerNumber;
+        timer.stop();
+        sounds.buzz();
+      };
+    }(this);
+  }
+]);
 
 app.directive("player", function() {
   return {
