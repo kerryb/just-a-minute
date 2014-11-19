@@ -29,17 +29,15 @@ app.service("timer", ["$interval", "sounds", function($interval, sounds) {
       $interval.cancel(_this.ticker);
     };
   }(this);
-
-  this.progressStyle = function(_this) {
-    return function() {
-      return { width: _this.remaining / 0.6 + "%" };
-    };
-  }(this);
 }]);
 
 app.controller("timerController", ["$scope", "$document", "timer",
   function($scope, $document, timer) {
     $scope.timer = timer;
+
+    $scope.progressStyle = function() {
+      return { width: timer.remaining / 0.6 + "%" };
+    };
 
     $document.bind("keypress", function(event) {
       if(event.which === 32) {
