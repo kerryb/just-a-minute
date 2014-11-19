@@ -19,5 +19,9 @@ h2.editable-click:hover {
 }
 
 .buzzed {
-  border: 2px solid red;
+  background-color: #428bca;
+}
+
+.buzzed h2 {
+  color: white;
 }
