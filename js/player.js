@@ -4,9 +4,11 @@ app.service("players", ["sounds", "timer",
 
     this.buzz = function(_this) {
       return function(playerNumber) {
-        _this.buzzedPlayer = playerNumber;
-        timer.stop();
-        sounds.buzz();
+        if (!_this.buzzedPlayer) {
+          _this.buzzedPlayer = playerNumber;
+          timer.stop();
+          sounds.buzz();
+        };
       };
     }(this);
   }
