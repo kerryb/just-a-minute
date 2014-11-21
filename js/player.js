@@ -12,6 +12,12 @@ app.service("players", ["sounds", "timer",
       };
     }(this);
 
+    this.switchToPlayer = function(_this) {
+      return function(playerNumber) {
+        _this.activePlayer = playerNumber;
+      };
+    }(this);
+
     this.continue = function(_this) {
       return function() {
         delete _this.buzzedPlayer;
@@ -40,6 +46,17 @@ app.directive("player", function() {
 
       $scope.buzzed = function() {
         return players.buzzedPlayer === $scope.number;
+      };
+
+      $scope.correctChallenge = function() {
+        $scope.player.score++;
+        players.switchToPlayer($scope.number);
+        players.continue();
+      };
+
+      $scope.incorrectChallenge = function() {
+        alert("TODO!");
+        players.continue();
       };
 
       $scope.bonus = function() {

@@ -46,8 +46,8 @@
         <div class="score" ng-bind="player.score"></div>
         <div class="challenge" ng-show="buzzed()">
           <h3>Challenge!</h3>
-          <button type="button" class="btn btn-success">Yes</button>
-          <button type="button" class="btn btn-danger">No</button>
+          <button type="button" class="btn btn-success" ng-click="correctChallenge()">Yes</button>
+          <button type="button" class="btn btn-danger" ng-click="incorrectChallenge()">No</button>
           <button type="button" class="btn btn-info" ng-click="bonus()">Bonus</button>
         </div>
       </div>
