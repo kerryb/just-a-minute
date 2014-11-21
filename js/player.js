@@ -11,6 +11,12 @@ app.service("players", ["sounds", "timer",
         };
       };
     }(this);
+
+    this.continue = function(_this) {
+      return function() {
+        delete _this.buzzedPlayer;
+      };
+    }(this);
   }
 ]);
 
@@ -38,6 +44,7 @@ app.directive("player", function() {
 
       $scope.bonus = function() {
         $scope.player.score++;
+        players.continue();
       };
 
       $document.bind("keypress", function(event) {
