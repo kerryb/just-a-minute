@@ -34,8 +34,8 @@ app.directive("player", function() {
         score: 0
       };
 
-      $scope.active = function() {
-        return players.activePlayer === $scope.number;
+      $scope.class = function() {
+        return { active: players.activePlayer === $scope.number };
       };
 
       $scope.buzzed = function() {
