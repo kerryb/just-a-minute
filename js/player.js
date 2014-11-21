@@ -36,6 +36,10 @@ app.directive("player", function() {
         return players.buzzedPlayer === $scope.number;
       };
 
+      $scope.bonus = function() {
+        $scope.player.score++;
+      };
+
       $document.bind("keypress", function(event) {
         if (event.which == $scope.number + 48) {
           players.buzz($scope.number);
