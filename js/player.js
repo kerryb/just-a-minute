@@ -1,5 +1,7 @@
 app.service("players", ["sounds", "timer",
   function(sounds, timer) {
+    this.activePlayer = 1;
+
     this.buzz = function(_this) {
       return function(playerNumber) {
         _this.buzzedPlayer = playerNumber;
@@ -19,10 +21,17 @@ app.directive("player", function() {
     templateUrl: "player.html",
 
     controller: function($scope, $document, players) {
-      $scope.name = "Player " + $scope.number;
+      $scope.player = {
+        name: "Player " + $scope.number,
+        score: 0
+      };
 
-      $scope.class = function() {
-        return { buzzed: players.buzzedPlayer === $scope.number };
+      $scope.active = function() {
+        return players.activePlayer === $scope.number;
+      };
+
+      $scope.buzzed = function() {
+        return players.buzzedPlayer === $scope.number;
       };
 
       $document.bind("keypress", function(event) {

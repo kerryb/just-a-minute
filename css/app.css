@@ -3,11 +3,16 @@ body {
 }
 
 .timer .remaining {
-  font-size: 4em;
+  text-align: right;
+  font-size: 8em;
 }
 
 .timer .buttons {
-  margin-top: 1.6em;
+  margin-top: 4em;
+}
+
+.player {
+  text-align: center;
 }
 
 h2.editable-click { 
@@ -18,10 +23,6 @@ h2.editable-click:hover {
   border-bottom: dotted 2px #428bca;
 }
 
-.buzzed {
-  background-color: #428bca;
-}
-
-.buzzed h2 {
-  color: white;
+.score {
+  font-size: 8em;
 }

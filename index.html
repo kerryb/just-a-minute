@@ -17,11 +17,11 @@
     <div class="container-fluid">
       <div class="timer" ng-controller="timerController">
         <div class="row">
-          <div class="col-md-2 col-md-offset-4">
-            <span class="remaining">{{ timer.remaining | number:1 }}</span>
+          <div class="col-md-6">
+            <div class="remaining">{{ timer.remaining | number:1 }}</div>
           </div>
-          <div class="col-md-4 buttons">
-            <button class="btn btn-success" ng-click="timer.start()">Start</button>
+          <div class="col-md-6 buttons">
+            <button class="btn btn-lg btn-success" ng-click="timer.start()">Start</button>
           </div>
         </div>
         <div class="row">
@@ -41,8 +41,15 @@
     </div>
 
     <script type="text/ng-template" id="player.html">
-      <div class="col-md-3" ng-class="class()">
-        <h2 editable-text="name">{{ name }}</h2>
+      <div class="col-md-3 player" ng-class="class()">
+        <h2 editable-text="player.name">{{ player.name }}</h2>
+        <div class="score" ng-bind="player.score"></div>
+        <div class="challenge" ng-show="buzzed()">
+          <h3>Challenge!</h3>
+          <button type="button" class="btn btn-success">Yes</button>
+          <button type="button" class="btn btn-danger">No</button>
+          <button type="button" class="btn btn-info">Bonus</button>
+        </div>
       </div>
     </script>
   </body>
