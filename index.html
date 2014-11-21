@@ -17,11 +17,11 @@
     <div class="container-fluid">
       <div class="timer" ng-controller="timerController">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4 col-md-offset-4">
             <div class="remaining">{{ timer.remaining | number:1 }}</div>
           </div>
-          <div class="col-md-6 buttons">
-            <button class="btn btn-lg btn-success" ng-click="timer.start()">Start</button>
+          <div class="col-md-2 buttons">
+            <button class="btn btn-lg btn-success" ng-hide="timer.running" ng-click="timer.start()">Start</button>
           </div>
         </div>
         <div class="row">

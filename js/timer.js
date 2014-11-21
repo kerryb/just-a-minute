@@ -1,4 +1,5 @@
 app.service("timer", ["$interval", "sounds", function($interval, sounds) {
+  this.running = false;
   this.remaining = 60;
 
   this.tick = function(_this) {
@@ -20,12 +21,14 @@ app.service("timer", ["$interval", "sounds", function($interval, sounds) {
 
   this.start = function(_this) {
     return function() {
+      _this.running = true;
       _this.ticker = $interval(_this.tick, 100);
     };
   }(this);
 
   this.stop = function(_this) {
     return function() {
+      _this.running = false;
       $interval.cancel(_this.ticker);
     };
   }(this);

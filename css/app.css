@@ -3,7 +3,7 @@ body {
 }
 
 .timer .remaining {
-  text-align: right;
+  text-align: center;
   font-size: 8em;
 }
 
