@@ -34,41 +34,43 @@ app.directive("player", function() {
 
     templateUrl: "player.html",
 
-    controller: function($scope, $document, players) {
-      $scope.player = {
-        name: "Player " + $scope.number,
-        score: 0
-      };
+    controller: ["$scope", "$document", "players",
+      function($scope, $document, players) {
+        $scope.player = {
+          name: "Player " + $scope.number,
+          score: 0
+        };
 
-      $scope.class = function() {
-        return { active: players.activePlayer === $scope.number };
-      };
+        $scope.class = function() {
+          return { active: players.activePlayer === $scope.number };
+        };
 
-      $scope.buzzed = function() {
-        return players.buzzedPlayer === $scope.number;
-      };
+        $scope.buzzed = function() {
+          return players.buzzedPlayer === $scope.number;
+        };
 
-      $scope.correctChallenge = function() {
-        $scope.player.score++;
-        players.switchToPlayer($scope.number);
-        players.continue();
-      };
+        $scope.correctChallenge = function() {
+          $scope.player.score++;
+          players.switchToPlayer($scope.number);
+          players.continue();
+        };
 
-      $scope.incorrectChallenge = function() {
-        alert("TODO!");
-        players.continue();
-      };
+        $scope.incorrectChallenge = function() {
+          alert("TODO!");
+          players.continue();
+        };
 
-      $scope.bonus = function() {
-        $scope.player.score++;
-        players.continue();
-      };
+        $scope.bonus = function() {
+          $scope.player.score++;
+          players.continue();
+        };
 
-      $document.bind("keypress", function(event) {
-        if (event.which == $scope.number + 48) {
-          players.buzz($scope.number);
-        }
-      });
-    }
+        $document.bind("keypress", function(event) {
+          if (event.which == $scope.number + 48) {
+            players.buzz($scope.number);
+          }
+        });
+      }
+    ]
   };
 });
