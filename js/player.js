@@ -8,13 +8,15 @@ app.directive("player", function() {
 
     controller: ["$scope", "$document", "scoreboard",
       function($scope, $document, scoreboard) {
+        scoreboard.registerPlayer($scope.number);
+
         $scope.player = {
           name: "Player " + $scope.number,
           score: 0
         };
 
         $scope.class = function() {
-          return { active: scoreboard.activePlayer === $scope.number };
+          return { active: scoreboard.isActive($scope.number) };
         };
 
         $scope.buzzed = function() {
