@@ -1,12 +1,14 @@
-app.service("sounds", ["ngAudio", function(ngAudio) {
-  this._buzz= ngAudio.load("media/buzz.wav");
-  this._whistle = ngAudio.load("media/whistle.wav");
+app.factory("sounds", ["ngAudio", function(ngAudio) {
+  return {
+    _buzz: ngAudio.load("media/buzz.wav"),
+    _whistle: ngAudio.load("media/whistle.wav"),
 
-  this.buzz = function() {
-    this._buzz.play();
-  };
+    buzz: function() {
+      this._buzz.play();
+    },
 
-  this.whistle = function() {
-    this._whistle.play();
+    whistle: function() {
+      this._whistle.play();
+    }
   };
 }]);
