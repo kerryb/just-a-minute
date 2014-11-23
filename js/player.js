@@ -19,14 +19,16 @@ app.directive("player", function() {
           return { active: scoreboard.isActive($scope.number) };
         };
 
+        $scope.score = function() {
+          return scoreboard.score($scope.number);
+        };
+
         $scope.buzzed = function() {
           return scoreboard.buzzedPlayer === $scope.number;
         };
 
         $scope.correctChallenge = function() {
-          $scope.player.score++;
-          scoreboard.switchToPlayer($scope.number);
-          scoreboard.continue();
+          scoreboard.correctChallenge($scope.number);
         };
 
         $scope.incorrectChallenge = function() {
@@ -35,8 +37,7 @@ app.directive("player", function() {
         };
 
         $scope.bonus = function() {
-          $scope.player.score++;
-          scoreboard.continue();
+          scoreboard.awardBonus($scope.number);
         };
 
         $document.bind("keypress", function(event) {

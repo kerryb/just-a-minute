@@ -40,7 +40,11 @@ app.controller("timerController", ["$scope", "$document", "$interval", "timer",
 
     $document.bind("keypress", function(event) {
       if(event.which === 32) {
+<<<<<<< HEAD
+        startTimer();
+=======
         $scope.startTimer();
+>>>>>>> dcf118b... Remove this hackery from timer service
       }
     });
   }

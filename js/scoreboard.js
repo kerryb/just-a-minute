@@ -15,12 +15,27 @@ app.service("scoreboard", ["sounds", "timer",
         return this.activePlayer === playerNumber;
       },
 
+      score: function(playerNumber) {
+        return this.players[playerNumber].score;
+      },
+
       buzz: function(playerNumber) {
         if (!this.buzzedPlayer) {
           this.buzzedPlayer = playerNumber;
           timer.stop();
           sounds.buzz();
         };
+      },
+
+      correctChallenge: function(challenger) {
+        this.players[challenger].score++;
+        this.switchToPlayer(challenger);
+        this.continue();
+      },
+
+      awardBonus: function(challenger) {
+        this.players[challenger].score++;
+        this.continue();
       },
 
       switchToPlayer: function(playerNumber) {
