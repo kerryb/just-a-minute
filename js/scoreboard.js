@@ -33,6 +33,11 @@ app.service("scoreboard", ["sounds", "timer",
         this.continue();
       },
 
+      incorrectChallenge: function(challenger) {
+        this.players[this.activePlayer].score++;
+        this.continue();
+      },
+
       awardBonus: function(challenger) {
         this.players[challenger].score++;
         this.continue();

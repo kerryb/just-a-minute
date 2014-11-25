@@ -32,8 +32,7 @@ app.directive("player", function() {
         };
 
         $scope.incorrectChallenge = function() {
-          alert("TODO!");
-          scoreboard.continue();
+          scoreboard.incorrectChallenge($scope.number);
         };
 
         $scope.bonus = function() {
