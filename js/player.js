@@ -12,7 +12,6 @@ app.directive("player", function() {
 
         $scope.player = {
           name: "Player " + $scope.number,
-          score: 0
         };
 
         $scope.class = function() {
