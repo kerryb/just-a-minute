@@ -47,6 +47,10 @@ app.service("scoreboard", ["sounds", "timer",
         this.activePlayer = playerNumber;
       },
 
+      timeUp: function() {
+        this.players[this.activePlayer].score++;
+      },
+
       continue: function() {
         delete this.buzzedPlayer;
       }

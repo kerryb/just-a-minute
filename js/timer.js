@@ -2,6 +2,7 @@ app.factory("timer", ["$interval", "sounds",
   function($interval, sounds) {
     return {
       running: false,
+      finished: false,
       remaining: 60,
 
       tick: function(timer) {
@@ -15,6 +16,7 @@ app.factory("timer", ["$interval", "sounds",
 
       timeUp: function() {
         this.stop();
+        this.finished = true;
         sounds.whistle();
       },
 
@@ -26,9 +28,15 @@ app.factory("timer", ["$interval", "sounds",
   }
 ]);
 
-app.controller("timerController", ["$scope", "$document", "$interval", "timer",
-  function($scope, $document, $interval, timer) {
+app.controller("timerController", ["$scope", "$document", "$interval", "timer", "scoreboard",
+  function($scope, $document, $interval, timer, scoreboard) {
     $scope.timer = timer;
+
+    $scope.$watch("timer.finished", function() {
+      if (timer.finished) {
+        scoreboard.timeUp();
+      }
+    });
 
     $scope.progressStyle = function() {
       return { width: timer.remaining / 0.6 + "%" };
