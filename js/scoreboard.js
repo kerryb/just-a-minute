@@ -50,7 +50,7 @@ app.service("scoreboard", ["sounds", "timer",
       continue: function() {
         delete this.buzzedPlayer;
       }
-    }
+    };
   }
 ]);
 
