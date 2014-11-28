@@ -1,6 +1,8 @@
 app.service("scoreboard", ["sounds", "timer",
   function(sounds, timer) {
     return {
+      startingPlayer: 1,
+      interrupted: false,
       activePlayer: 1,
       players: {},
 
@@ -29,6 +31,7 @@ app.service("scoreboard", ["sounds", "timer",
 
       correctChallenge: function(challenger) {
         this.players[challenger].score++;
+        this.interrupted = true;
         this.switchToPlayer(challenger);
         this.continue();
       },
@@ -39,7 +42,9 @@ app.service("scoreboard", ["sounds", "timer",
       },
 
       awardBonus: function(challenger) {
+        this.players[this.activePlayer].score++;
         this.players[challenger].score++;
+        this.interrupted = true;
         this.continue();
       },
 
@@ -48,7 +53,8 @@ app.service("scoreboard", ["sounds", "timer",
       },
 
       timeUp: function() {
-        this.players[this.activePlayer].score++;
+        this.players[this.activePlayer].score += (this.interrupted ? 1 : 2);
+        this.startingPlayer = this.activePlayer = this.startingPlayer % 4 + 1;
       },
 
       continue: function() {

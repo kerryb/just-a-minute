@@ -8,6 +8,7 @@ app.factory("timer", ["$interval", "sounds",
       tick: function(timer) {
         if (timer.remaining > 0) {
           timer.running = true;
+          timer.finished = false;
           timer.remaining -= 0.1;
         } else {
           timer.timeUp();
@@ -17,6 +18,7 @@ app.factory("timer", ["$interval", "sounds",
       timeUp: function() {
         this.stop();
         this.finished = true;
+        this.remaining = 60;
         sounds.whistle();
       },
 
